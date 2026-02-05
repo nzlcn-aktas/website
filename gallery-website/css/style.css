@@ -1,0 +1,434 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .menu-btn {
+        display: block;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #111;
+        width: 200px;
+        padding-top: 4rem;
+        gap: 1.5rem;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .gallery-split {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 20vh);
+    }
+    .artist-column span {
+        font-size: 1.3rem;
+    }
+    .social-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .gallery-content {
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .art-card img {
+        height: 160px;
+    }
+    .gallery-wrapper { flex-direction: column; }
+    .gallery-split { height: 50%; }
+    .gallery-split.shrink { height: 20%; width: 100%; }
+    .gallery-content.active { width: 100%; height: 80%; }
+}
+
+.page-home .logo {
+    display: inline-block;
+    background: linear-gradient(to right, #8c86bd, #82a0d0);
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-weight: bold;
+}
+footer {
+    text-align: center;
+    padding: 1.2rem;
+    background: linear-gradient(to right, #bcb5ec, #a8c6f6);
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px 10px 0 0;
+    margin-top: 0rem; 
+    position: relative; 
+}
+
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgb(216, 218, 240);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    z-index: 9998;
+}
+
+.nav-links {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 200px;
+    height: 100vh;
+    background-color: #27305a;
+    display: flex;
+    flex-direction: column;
+    padding-top: 4rem;
+    gap: 1.5rem;
+    transition: right 0.5s ease;
+    z-index: 2000;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: transform 0.25s ease, text-shadow 0.25s ease, color 0.25s ease;
+}
+
+.nav-links a:hover {
+    transform: scale(1.04);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    color: rgb(215, 186, 101);
+}
+
+.nav-links.active {
+    right: 0;
+}
+
+.menu-btn {
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 9999;
+    position: relative;
+    transition: transform 0.15s ease, text-shadow 0.15s ease, color 0.15s ease;
+}
+
+.menu-btn.active {
+    color: #fff;
+}
+
+.menu-btn:hover {
+    transform: scale(1.04);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+    background-image: url("../data/background images/ArtGallerybackground.jpeg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+.hero h3, .hero h4 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.btn {
+    padding: 0.8rem 2.2rem;
+    margin-top:2rem;
+    border-radius: 30px;
+    background: white;
+    color: #203a43;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    transform: translateY(-3px);
+}
+
+.page-about {
+    background: #e0e0ec;
+    color: #1e094c;
+}
+.page-gallery {
+    overflow: hidden;
+}
+
+
+/* Ana Yapı */
+.gallery-wrapper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.gallery-split {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-split.shrink {
+    width: 30%;
+}
+
+.artist-column {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.6s ease;
+}
+
+.artist-column::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    transition: background 0.4s ease; /* Geçişin yumuşak olması için */
+    z-index: 1;
+}
+.artist-column:hover::before {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* SEÇİLİ (AKTİF) SÜTUN: Karartmayı neredeyse tamamen kaldırır */
+.artist-column.active::before {
+    background: rgba(0, 0, 0, 0.1); /* Buradaki 0.1 değerini 0 yaparsan hiç karartma kalmaz */
+}
+
+/* Seçili sütundaki metni daha belirgin yapalım */
+.artist-column.active span {
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Okunabilirlik için hafif gölge */
+}
+
+.artist-column span {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.5s ease;
+}
+
+/* Daralma Efekti */
+.gallery-split.shrink .artist-column span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 1.1rem;
+}
+
+.gallery-content {
+    width: 0;
+    opacity: 0;
+    overflow-y: auto;
+    background: #fdfdfd;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+.gallery-content.active {
+    width: 70%;
+    opacity: 1;
+    padding: 3rem 2rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.art-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.img-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.art-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.all { background-image: url("../data/background images/all.jpeg"); }
+.van-gogh { background-image: url("../data/background images/vangogh.jpeg"); }
+.monet { background-image: url("../data/background images/monet.jpeg"); }
+.picasso { background-image: url("../data/background images/picasso.jpeg"); }
+.klimt { background-image: url("../data/background images/klimt.jpeg"); }
+
+.top-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 1rem 1.5rem;
+    z-index: 100;
+}
+
+.home-btn {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.5s ease;
+    backdrop-filter: blur(5px);
+}
+body.gallery-open .home-btn {
+    background: rgba(0, 0, 0, 0.8); /* Siyah arka plan */
+    color: white; /* Yazı beyaz kalabilir veya siyah isterseniz #000 yapabilirsiniz */
+    border-color: black;
+}
+
+.home-btn:hover {
+    background: rgba(255,255,255,0.35);
+    transform: scale(1.05);
+    color: #e9cd42;
+}
+
+
+.about-header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(to right, #a69ede, #7196d0);
+    color: #213599;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.about-main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.about-description, .about-contact {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.about-description h2, .about-contact h2 {
+    color: #0042b5;
+    margin-bottom: 1rem;
+}
+
+.about-description p {
+    margin-bottom: 1.5rem;
+    color: #4d1ece;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.about-contact p {
+    margin-bottom: 1rem;
+}
+
+.about-contact a {
+    color: #0042b5;
+    text-decoration: none;
+}
+
+.about-contact a:hover {
+    text-decoration: underline;
+}
+
+.social-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.social-links li a {
+    background: #0042b5;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.social-links li a:hover {
+    background: #007b8a;
+}
